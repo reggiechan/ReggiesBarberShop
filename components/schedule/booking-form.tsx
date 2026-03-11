@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Calendar, Check, ChevronLeft, ChevronRight, Clock, User } from "lucide-react";
 
 const services = [
-  { id: "haircut", name: "Classic Haircut", duration: "45 min", price: 35 },
+  { id: "haircut", name: "Classic Haircut", duration: "45 min", price: 30 },
   { id: "beard", name: "Beard Grooming", duration: "30 min", price: 25 },
   { id: "package", name: "Complete Package", duration: "75 min", price: 55 },
   { id: "shave", name: "Hot Towel Shave", duration: "30 min", price: 30 },
