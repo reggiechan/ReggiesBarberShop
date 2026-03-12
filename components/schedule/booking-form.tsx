@@ -102,11 +102,39 @@ export function BookingForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    if (!selectedService || !selectedBarber || !selectedDate || !selectedTime) {
+      alert("Please complete your booking details before submitting.");
+      setIsSubmitting(false);
+      return;
+    }
 
-    setIsSuccess(true);
-    setIsSubmitting(false);
+    try {
+      const payload = {
+        serviceId: selectedService,
+        barberId: selectedBarber,
+        date: selectedDate.toISOString(),
+        time: selectedTime,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        notes: formData.notes,
+      };
+
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Failed to create booking");
+
+      setIsSuccess(true);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to confirm booking. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const goToNextStep = () => {
